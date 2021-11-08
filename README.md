@@ -21,3 +21,5 @@ The `install.sh` script will install the following:
 
 Additionally it will:
 - configure Home and End keys to go to the end of text lines when pressed
+- rename the local device (if uncommented)
+- reboot
