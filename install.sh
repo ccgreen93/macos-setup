@@ -7,6 +7,7 @@
 
 # install work related packages
 brew install ansible
+brew install ansible-lint
 brew install --cask authy
 brew install awscli
 brew install --cask bitwarden
