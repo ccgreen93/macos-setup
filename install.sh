@@ -96,6 +96,13 @@ echo '{
 # https://github.com/antonbabenko/pre-commit-terraform
 
 
+# show hidden folder and files
+defaults write com.apple.Finder AppleShowAllFiles true
+
+# # hide hidden folder and files
+# defaults write com.apple.Finder AppleShowAllFiles false
+
+
 
 # change hostname
 #sudo scutil --set HostName mbp.fqdn.tld
