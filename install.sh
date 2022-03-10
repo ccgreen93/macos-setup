@@ -41,8 +41,11 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # source zsh-history-substring-search.zsh
 
 # zsh syntax highlighting
-brew install zsh-syntax-highlighting
-echo "source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >>~/.zshrc
+# brew install zsh-syntax-highlighting
+# echo "source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >>~/.zshrc
+# faster highlighting: https://github.com/zdharma-continuum/fast-syntax-highlighting
+git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
 
 # zsh-history-substring-search
 git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
@@ -102,12 +105,13 @@ brew install azure-cli
 ## gcp
 brew install --cask google-cloud-sdk
 
-## terraform
+## terraform/grunt
 # pre-commit: https://github.com/antonbabenko/pre-commit-terraform
 brew install terraform-docs
 # brew install liamg/tfsec/tfsec
 brew install tflint
 brew install warrensbox/tap/tfswitch
+brew install warrensbox/tap/tgswitch
 brew install graphwiz # for visualising terraform
 
 ## vault
