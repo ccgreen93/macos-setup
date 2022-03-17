@@ -126,7 +126,11 @@ brew install --cask virtualbox
 brew install --cask virtualbox-extension-pack
 
 ## kubernetes
-brew install kubectl #https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/#install-with-homebrew-on-macos
+brew install kubectl
+brew install --cask lens   # k8s IDE
+
+## minikube
+brew install minikube
 
 # auth
 brew install --cask authy
@@ -140,6 +144,7 @@ brew install --cask whatsapp
 
 ## other
 brew install --cask brave-browser
+brew install caffeine
 brew install --cask gimp
 brew install --cask microsoft-remote-desktop
 brew install --cask scroll-reverser
