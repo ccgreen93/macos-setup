@@ -5,6 +5,11 @@
 ## brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+
+# install latest bash and add to shell
+brew install bash
+sudo bash -c "echo /usr/local/bin/bash >> /etc/shells"  # or /private/etc/shells ?
+
 # install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" --unattended
 # install Powerlevel10K theme - will prompt to customise on next run
@@ -84,7 +89,7 @@ curl https://raw.githubusercontent.com/QuentinWatt/dark-flat-iterm-colors/master
 ## hide hidden folder and files
 # defaults write com.apple.Finder AppleShowAllFiles false
 
-######### Packages
+######### Packages - replace with Brewfile
 ## git
 brew tap microsoft/git
 brew install --cask git-credential-manager-core
@@ -129,14 +134,25 @@ brew install --cask virtualbox-extension-pack
 brew install kubectl
 brew install --cask lens   # k8s IDE
 
+## helm
+brew install helm
+# https://github.com/jkroepke/helm-secrets/wiki/Installation
+helm plugin install https://github.com/jkroepke/helm-secrets --version v3.12.0
+
 ## minikube
 brew install minikube
 
-# auth
+## packer
+brew install packer
+
+## powershell
+brew install --cask powershell
+
+## auth
 brew install --cask authy
 brew install --cask bitwarden
 
-# comms
+## comms
 #brew install --cask slack
 #brew install --cask microsoft-teams
 brew install --cask signal
@@ -146,15 +162,20 @@ brew install --cask whatsapp
 brew install --cask brave-browser
 brew install caffeine
 brew install --cask gimp
+brew install jq
 brew install --cask microsoft-remote-desktop
 brew install --cask scroll-reverser
+brew install shellcheck    # then install https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck in vs-code
 brew install sops
 brew install --cask spectacle
 brew install --cask spotify
+brew install tree
 brew install watch
 brew install yamllint
 
-
+#### git
+git config --global core.excludesFile '~/.gitignore'
+echo "chris.sh" >> ~/.gitignore
 
 ###### SYSTEM
 # password prompt on screensaver and sleep
