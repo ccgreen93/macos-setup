@@ -1,6 +1,3 @@
-# SSH Keys
-ssh-add --apple-load-keychain # replaces ssh-add -A
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -9,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -81,17 +78,18 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	# auto-fortune-cowsay	# missing fortune plugin?
-	git
-	zsh-autosuggestions
-	colored-man-pages
-	command-not-found		# not working?
-	alias-finder
-	alias-tips				# https://github.com/djui/alias-tips
-	terraform
-	kubectl
-	oh-my-matrix			# https://github.com/amstrad/oh-my-matrix
-	fast-syntax-highlighting
+        auto-fortune-cowsay         # missing fortune plugin?
+        git
+        zsh-autosuggestions
+        colored-man-pages
+        command-not-found               # not working?
+        alias-finder
+        alias-tips                              # https://github.com/djui/alias-tips
+        terraform
+        kubectl
+        oh-my-matrix                    # https://github.com/amstrad/oh-my-matrix
+        fast-syntax-highlighting
+        zsh-history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -119,9 +117,18 @@ export HOMEBREW_NO_AUTO_UPDATE=1   # disable brew auto update
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+alias glo="git pull origin"
+
 alias sshconfig="code ~/.ssh/config"
+alias sshknownhosts="code ~/.ssh/known_hosts"
+
 alias zshconfig="code ~/.zshrc"
-# alias ohmyzsh="code ~/.oh-my-zsh"
+alias p10kzsh="code ~/.p10k.zsh"
+
+# so that aliases work with watch
+alias watch='watch '
+
+alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 ## installed by terraform plugin
 # alias tf=terraform
@@ -131,13 +138,30 @@ alias zshconfig="code ~/.zshrc"
 # alias tfa="terraform apply"
 alias tfstart="terraform init; terraform fmt; terraform validate"
 alias tfgo="terraform fmt; terraform validate; terraform apply"
+alias tfaaa="terraform apply -auto-approve"
+alias tfdaa="terraform destroy -auto-approve"
 
-# alias k=kubectl
-# compdef __start_kubectl k
+alias tffmtdocs="echo \"Running terraform fmt ...\"; terraform fmt -recursive; echo \"Running terragrunt hclfmt ...\"; terragrunt hclfmt -recursive; echo \"Running terraform-docs ...\"; terraform-docs markdown table --output-file=../README.md --output-mode=inject module"
+
+alias tg='terragrunt'
+alias tgi="terragrunt init"
+alias tgv="terragrunt validate"
+alias tgp="terragrunt plan"
+alias tga="terragrunt apply"
+alias tgd="terragrunt destroy"
+alias tgaaa="terragrunt apply -auto-approve"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # replaced with fast-syntax-highlighting
+if command -v pyenv 1>/dev/null; then
+  eval "$(pyenv init - &>/dev/null)" &>/dev/null
+fi
 
-eval "$(pyenv init -)"
+# SSH Keys
+ssh-add --apple-load-keychain &>/dev/null # replaces ssh-add -A
+
+# gke-gcloud-auth-plugin for kubectl
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+echo
